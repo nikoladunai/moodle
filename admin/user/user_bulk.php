@@ -10,12 +10,14 @@ admin_externalpage_setup('userbulk');
 if (!isset($SESSION->bulk_users)) {
     $SESSION->bulk_users = array();
 }
+
 // create the user filter form
 $ufiltering = new user_filtering();
 
 // array of bulk operations
 // create the bulk operations form
 $action_form = new user_bulk_action_form();
+
 if ($data = $action_form->get_data()) {
     // check if an action should be performed and do so
     switch ($data->action) {
@@ -26,6 +28,7 @@ if ($data = $action_form->get_data()) {
         case 5: redirect($CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk_download.php');
         case 7: redirect($CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk_forcepasswordchange.php');
         case 8: redirect($CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk_cohortadd.php');
+        case 9: redirect($CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk_suspend.php');
     }
 }
 
@@ -77,6 +80,7 @@ if ($data = $user_bulk_form->get_data()) {
 echo $OUTPUT->header();
 
 $ufiltering->display_add();
+
 $ufiltering->display_active();
 
 $user_bulk_form->display();
